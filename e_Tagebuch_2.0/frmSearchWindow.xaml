@@ -1,0 +1,41 @@
+﻿<Window x:Class="e_Tagebuch_2._0.frmSearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:e_Tagebuch_2._0"
+        mc:Ignorable="d"
+        Title="frmSearchWindow" Height="530.889" Width="474.111">
+    <Grid>
+        <CheckBox x:Name="chkDate" Content="Suche nach Datum" HorizontalAlignment="Left" Margin="34,42,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkType" Content="Suche nach Dömäne" HorizontalAlignment="Left" Margin="34,86,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dpSearchDate" HorizontalAlignment="Left" Margin="180,38,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cmbType" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="180,79,0,0"/>
+        <Label Content="Suchkriterien" HorizontalAlignment="Left" Margin="34,10,0,0" VerticalAlignment="Top"/>
+        <ListView x:Name="lvwView" HorizontalAlignment="Left" Height="336" Margin="34,141,0,0" VerticalAlignment="Top" Width="266">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Datum" Width="50" DisplayMemberBinding="{Binding Datum}" />
+                    <GridViewColumn Header="Domaene" Width="150" DisplayMemberBinding="{Binding Domaene}" />
+                    <GridViewColumn Header="Text" Width="150" DisplayMemberBinding="{Binding Text}" />
+                    <GridViewColumn Header="Bildpfad" Width="150" DisplayMemberBinding="{Binding Bildpfad}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Gefundene Einträge" HorizontalAlignment="Left" Margin="34,115,0,0" VerticalAlignment="Top"/>
+        <Label Content="Textsuche" HorizontalAlignment="Left" Margin="309,142,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtSuche" Text="" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="309,170,0,0"/>
+        <Button x:Name="bntShow" Content="Anzeigen" HorizontalAlignment="Left" Margin="309,315,0,0" VerticalAlignment="Top" Width="119" Height="22"/>
+        <DatePicker x:Name="dpRangeDate" HorizontalAlignment="Left" Margin="309,239,0,0" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="chkdateSince" Content="Zeige alle Daten&#xD;&#xA; ohne Einträge seit:" HorizontalAlignment="Left" Margin="309,203,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="bntNew" Content="Neuer Eintrag" HorizontalAlignment="Left" Margin="310,388,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="bntNew_Click"/>
+        <Button x:Name="bntEdit" Content="Eintrag bearbeiten" HorizontalAlignment="Left" Margin="309,351,0,0" VerticalAlignment="Top" Width="119" Height="22"/>
+        <Label Content="Aktuelles Tagebuch:" HorizontalAlignment="Left" Margin="318,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.432,0.333"/>
+        <TextBox x:Name="txtTagebuch" IsEnabled="False" Text="" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="318,40,0,0"/>
+        <Button x:Name="bntClose" Content="Schliessen" HorizontalAlignment="Left" Margin="310,455,0,0" VerticalAlignment="Top" Width="119" Height="22"/>
+        <Button x:Name="bntClear" Content="Clear search" HorizontalAlignment="Left" Margin="309,277,0,0" VerticalAlignment="Top" Width="119" Height="22"/>
+        <Button x:Name="bntRemove" Content="Remove" HorizontalAlignment="Left" Margin="310,420,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="bntNew_Click"/>
+        <Button x:Name="bntChange" Content="Change diary" HorizontalAlignment="Left" Margin="318,79,0,0" VerticalAlignment="Top" Width="119" Height="22"/>
+    </Grid>
+</Window>
