@@ -55,7 +55,7 @@ namespace e_Tagebuch_2._0
             int entryID = con.Create_Entry("New Entry", DiaryID);
             frmEditor editor = new frmEditor(entryID);
             editor.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

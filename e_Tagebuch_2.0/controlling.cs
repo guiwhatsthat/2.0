@@ -89,5 +89,50 @@ namespace e_Tagebuch_2._0
             }
             return AllDiaries;
         }
+
+        public void Save_Entry(int t_ID, string t_Name, DateTime t_Date, string t_Text, string t_Picture)
+        {
+            using (var DB = new e_Tagebuch_Context())
+            {
+                //Get entry
+                var entry = DB.Entries.FirstOrDefault(e => e.EntryID == t_ID);
+
+                //set current values
+                entry.Name = t_Name;
+                entry.Date = t_Date.Date;
+                entry.Text = t_Text;
+                entry.Picture = t_Picture;
+
+                //Save
+                DB.SaveChanges();
+            }
+        }
+
+        public Diary Get_DiaryFromEntry(int t_EntryID)
+        {
+            e_Tagebuch_Context DB = new e_Tagebuch_Context();
+            int diaryID = DB.Entries.FirstOrDefault(e => e.EntryID == t_EntryID).Diary_id;
+            return DB.Diaries.FirstOrDefault(d => d.DiaryID == diaryID);
+        }
+
+        public void Save_types(int t_EntryID, string[] t_typ)
+        {
+            e_Tagebuch_Context DB = new e_Tagebuch_Context();
+            var entry = DB.Entries.FirstOrDefault(e => e.EntryID == t_EntryID);
+            string type = string.Join(",",t_typ);
+            entry.Type = type;
+            DB.SaveChanges();
+        }
+
+        public string[] Get_types(int t_EntryID)
+        {
+            e_Tagebuch_Context DB = new e_Tagebuch_Context();
+            var entry = DB.Entries.FirstOrDefault(e => e.EntryID == t_EntryID);
+            if (entry.Type != null)
+            {
+                return entry.Type.Split(',');
+            }
+            return null;
+        }
     }
 }

@@ -55,5 +55,25 @@ namespace e_Tagebuch_2._0
                 this.Hide();
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //create a instance of controlling
+            controlling con = new controlling();
+
+            //Get id of the diary
+            if (cmbDiaries.SelectedItem != null)
+            {
+                e_Tagebuch_Context DB = new e_Tagebuch_Context();
+                var diary = DB.Diaries.FirstOrDefault(d => d.Name == cmbDiaries.SelectedItem.ToString());
+                con.Show_SearchWindow(diary.DiaryID);
+                this.Hide();
+            } else
+            {
+                MessageBox.Show("No diary is selected", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            
+
+        }
     }
 }

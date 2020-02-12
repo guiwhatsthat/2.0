@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,44 @@ namespace e_Tagebuch_2._0
                 dpDatepicker.DisplayDate = entry.Date;
             }
                 
+        }
+
+        private void BntSave_Click(object sender, RoutedEventArgs e)
+        {
+            //Save current data
+            controlling con = new controlling();
+            if (txtName.Text == null || dpDatepicker.Text == null || txtMain.Text == null || lblPicPath.Content.ToString() == null)
+            {
+                MessageBox.Show("No of the values can be empty", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else
+            {
+                con.Save_Entry(EntryID, txtName.Text, DateTime.Parse(dpDatepicker.Text), txtMain.Text, lblPicPath.Content.ToString());
+            }            
+        }
+
+        private void BntClose_Click(object sender, RoutedEventArgs e)
+        {
+            controlling con = new controlling();
+            var diary = con.Get_DiaryFromEntry(EntryID);
+            frmSearchWindow searchWindow = new frmSearchWindow(diary.DiaryID);
+            searchWindow.Show();
+            this.Close();
+        }
+
+        private void BntChoose_Click(object sender, RoutedEventArgs e)
+        {
+            frmTypeSelector typeSelector = new frmTypeSelector(EntryID);
+            typeSelector.Show();
+        }
+
+        private void BntChoosePic_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                lblPicPath.Content = openFileDialog.FileName;
+            }
         }
     }
 }
