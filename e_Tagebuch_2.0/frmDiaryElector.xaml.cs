@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace e_Tagebuch_2._0
 {
     /// <summary>
@@ -36,24 +37,36 @@ namespace e_Tagebuch_2._0
 
         private void btnCreateDiary_Click(object sender, RoutedEventArgs e)
         {
-            //create a instance of controlling
-            controlling con = new controlling();
+            try
+            {
+                //create a instance of controlling
+                controlling con = new controlling();
 
-            //Create a new diary
-            if (string.IsNullOrEmpty(txtDiaryName.Text))
-            {
-                MessageBox.Show("Name missing","Error",MessageBoxButton.OK,MessageBoxImage.Warning);
-            }
-            else
-            {
-                int id = con.Create_Diary(txtDiaryName.Text, CurrentUsername);
-                if (id == -1)
+                //Create a new diary
+                if (string.IsNullOrEmpty(txtDiaryName.Text))
                 {
-                    throw new Exception("Could not create the diary");
+                    throw new Exception("Name missing");
                 }
-                con.Show_SearchWindow(id);
-                this.Hide();
+                else if (con.Diary_Exist(txtDiaryName.Text))
+                {
+                    throw new Exception($"Diary with the name {txtDiaryName.Text} already exists");
+                }
+                else
+                {
+                    int id = con.Create_Diary(txtDiaryName.Text, CurrentUsername);
+                    if (id == -1)
+                    {
+                        throw new Exception("Could not create the diary");
+                    }
+                    con.Show_SearchWindow(id);
+                    this.Close();
+                }
             }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

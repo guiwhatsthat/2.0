@@ -134,5 +134,11 @@ namespace e_Tagebuch_2._0
             }
             return null;
         }
+        
+        public bool Diary_Exist(string t_Name)
+        {
+            e_Tagebuch_Context DB = new e_Tagebuch_Context();
+            return DB.Diaries.Any(d => d.Name == t_Name);
+        }
     }
 }

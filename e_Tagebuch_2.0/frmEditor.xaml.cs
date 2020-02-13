@@ -45,9 +45,9 @@ namespace e_Tagebuch_2._0
         {
             //Save current data
             controlling con = new controlling();
-            if (txtName.Text == null || dpDatepicker.Text == null || txtMain.Text == null || lblPicPath.Content.ToString() == null)
+            if (txtName.Text == null || dpDatepicker.Text == null || txtMain.Text == null || lblPicPath.Content == null)
             {
-                MessageBox.Show("No of the values can be empty", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("None of the values can be empty", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else
             {
                 con.Save_Entry(EntryID, txtName.Text, DateTime.Parse(dpDatepicker.Text), txtMain.Text, lblPicPath.Content.ToString());

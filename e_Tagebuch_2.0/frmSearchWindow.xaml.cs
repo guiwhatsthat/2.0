@@ -57,5 +57,17 @@ namespace e_Tagebuch_2._0
             editor.Show();
             this.Close();
         }
+
+        private void BntClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            Environment.Exit(0);
+        }
+
+        private void BntEdit_Click(object sender, RoutedEventArgs e)
+        {
+            //Es funktioniert nicht die elemente aus der list vie zu bekommen
+            //Muss die ganze listview mit list items neu machen
+        }
     }
 }
