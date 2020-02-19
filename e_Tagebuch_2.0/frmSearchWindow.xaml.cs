@@ -89,7 +89,7 @@ namespace e_Tagebuch_2._0
             var allEntries = control.Get_AllEntries(DiaryID);
             if (allEntries != null)
             {
-                dgView.ItemsSource = allEntries;
+                dgView.ItemsSource = allEntries.Select(d => new {Name = d.Name, Date = d.Date , EntryID = d.EntryID });
             }
         }
 
@@ -120,17 +120,17 @@ namespace e_Tagebuch_2._0
 
             if (!string.IsNullOrEmpty(txtSuche.Text))
             {
-                dgView.ItemsSource = con.Search_Entries("Name", txtSuche.Text);
+                dgView.ItemsSource = con.Search_Entries("Name", txtSuche.Text).Select(d => new { Name = d.Name, Date = d.Date, EntryID = d.EntryID });
             } else if (chkDate.IsChecked == true && dpSearchDate.SelectedDate != null)
             {
-                dgView.ItemsSource = con.Search_Entries("Date", dpSearchDate.SelectedDate.ToString());
+                dgView.ItemsSource = con.Search_Entries("Date", dpSearchDate.SelectedDate.ToString()).Select(d => new { Name = d.Name, Date = d.Date, EntryID = d.EntryID });
             } else if (chkType.IsChecked == true && cmbType.SelectedItem != null)
             {
-                dgView.ItemsSource = con.Search_Entries("Type", cmbType.SelectedItem.ToString());
+                dgView.ItemsSource = con.Search_Entries("Type", cmbType.SelectedItem.ToString()).Select(d => new { Name = d.Name, Date = d.Date, EntryID = d.EntryID });
             } else if (chkdateSince .IsChecked == true && dpFrom.SelectedDate.HasValue == true && dpTo.SelectedDate.HasValue == true)
             {
                 dgView.ItemsSource = con.Get_EmptyDays(dpFrom.SelectedDate.Value, dpTo.SelectedDate.Value);
-            }
+            } 
         }
 
         private void bntClear_Click(object sender, RoutedEventArgs e)
