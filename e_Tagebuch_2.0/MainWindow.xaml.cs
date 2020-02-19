@@ -57,7 +57,7 @@ namespace e_Tagebuch_2._0
             if (con.Check_Credential(txtUsername.Text,txtPW.Text))
             {
                 con.Show_Diary(txtUsername.Text);
-                this.Hide();
+                this.Close();
             } 
             else
             {

@@ -28,7 +28,8 @@ namespace e_Tagebuch_2._0
 
             //Set combobox with diaries
             controlling con = new controlling();
-            foreach (var diary in con.Get_AllDiaries())
+            int userID = con.Get_UserID(t_CurrentUsername);
+            foreach (var diary in con.Get_AllDiaries(userID))
             {
                 cmbDiaries.Items.Add(diary);
             }

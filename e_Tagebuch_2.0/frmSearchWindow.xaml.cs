@@ -35,17 +35,7 @@ namespace e_Tagebuch_2._0
             var diary = con.Diaries.FirstOrDefault(d => d.DiaryID == DiaryID);
             txtTagebuch.Text = diary.Name;
 
-            //Update list with all entries
-            controlling control = new controlling();
-            var allEntries = control.Get_AllEntries(DiaryID);
-            if (allEntries != null)
-            {
-                foreach (var cEntry in allEntries)
-                {
-                    var row = new { Name = cEntry.Name, Datum = cEntry.Date.Date, Domaene = cEntry.Type, Text = cEntry.Text, Bildpfad = cEntry.Picture };
-                    lvwView.Items.Add(row);
-                }
-            }
+            Update_EntryView();
         }
 
         private void bntNew_Click(object sender, RoutedEventArgs e)
@@ -66,8 +56,94 @@ namespace e_Tagebuch_2._0
 
         private void BntEdit_Click(object sender, RoutedEventArgs e)
         {
-            //Es funktioniert nicht die elemente aus der list vie zu bekommen
-            //Muss die ganze listview mit list items neu machen
+            try
+            {
+                var item = (Entry)dgView.SelectedItem;
+                if (item != null)
+                {
+                    frmEditor editor = new frmEditor(item.EntryID);
+                    editor.Show();
+                    this.Close();
+                }
+            }
+            catch {
+                MessageBox.Show("You can not edit any empty day");
+            }
+        }
+
+        private void bntRemove_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (Entry)dgView.SelectedItem;
+            if (item != null)
+            {
+                controlling con = new controlling();
+                con.Remove_Entry(item.EntryID);
+                Update_EntryView();
+            }   
+        }
+
+        private void Update_EntryView ()
+        {
+            //Update list with all entries
+            controlling control = new controlling();
+            var allEntries = control.Get_AllEntries(DiaryID);
+            if (allEntries != null)
+            {
+                dgView.ItemsSource = allEntries;
+            }
+        }
+
+        //Function to control the search option
+        public void Set_SearchElement (object sender, RoutedEventArgs e)
+        {
+            var list = (this.Content as Panel).Children.OfType<CheckBox>();
+            foreach (var item in list) {
+                var name = "";
+                if (sender.GetType().Name == "CheckBox")
+                {
+                    name = ((CheckBox)sender).Name;
+                }
+                
+                if (name != item.Name)
+                {
+                    item.IsChecked = false;
+                } else
+                {
+                    txtSuche.Text = "";
+                }
+            }
+        }
+
+        private void bntShow_Click(object sender, RoutedEventArgs e)
+        {
+            controlling con = new controlling();
+
+            if (!string.IsNullOrEmpty(txtSuche.Text))
+            {
+                dgView.ItemsSource = con.Search_Entries("Name", txtSuche.Text);
+            } else if (chkDate.IsChecked == true && dpSearchDate.SelectedDate != null)
+            {
+                dgView.ItemsSource = con.Search_Entries("Date", dpSearchDate.SelectedDate.ToString());
+            } else if (chkType.IsChecked == true && cmbType.SelectedItem != null)
+            {
+                dgView.ItemsSource = con.Search_Entries("Type", cmbType.SelectedItem.ToString());
+            } else if (chkdateSince .IsChecked == true && dpFrom.SelectedDate.HasValue == true && dpTo.SelectedDate.HasValue == true)
+            {
+                dgView.ItemsSource = con.Get_EmptyDays(dpFrom.SelectedDate.Value, dpTo.SelectedDate.Value);
+            }
+        }
+
+        private void bntClear_Click(object sender, RoutedEventArgs e)
+        {
+            Set_SearchElement(sender, e);
+            Update_EntryView();
+        }
+
+        private void bntChange_Click(object sender, RoutedEventArgs e)
+        {
+            controlling con = new controlling();
+            con.Show_Diary(con.Get_DiaryUser(DiaryID));
+            this.Close();
         }
     }
 }

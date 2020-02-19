@@ -5,37 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:e_Tagebuch_2._0"
         mc:Ignorable="d"
-        Title="frmSearchWindow" Height="530.889" Width="474.111">
+        Title="frmSearchWindow" Height="564.889" Width="474.111">
     <Grid>
-        <CheckBox x:Name="chkDate" Content="Suche nach Datum" HorizontalAlignment="Left" Margin="34,42,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="chkType" Content="Suche nach Dömäne" HorizontalAlignment="Left" Margin="34,86,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkDate" Content="Search by date" HorizontalAlignment="Left" Margin="34,42,0,0" VerticalAlignment="Top" Checked="Set_SearchElement"/>
+        <CheckBox x:Name="chkType" Content="Search by type" HorizontalAlignment="Left" Margin="34,86,0,0" VerticalAlignment="Top" Checked="Set_SearchElement"/>
         <DatePicker x:Name="dpSearchDate" HorizontalAlignment="Left" Margin="180,38,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="cmbType" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="180,79,0,0"/>
         <Label Content="Suchkriterien" HorizontalAlignment="Left" Margin="34,10,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="lvwView" HorizontalAlignment="Left" Height="336" Margin="34,141,0,0" VerticalAlignment="Top" Width="266">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Datum" Width="50" DisplayMemberBinding="{Binding Datum}" />
-                    <GridViewColumn Header="Domaene" Width="150" DisplayMemberBinding="{Binding Domaene}" />
-                    <GridViewColumn Header="Text" Width="150" DisplayMemberBinding="{Binding Text}" />
-                    <GridViewColumn Header="Bildpfad" Width="150" DisplayMemberBinding="{Binding Bildpfad}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Label Content="Gefundene Einträge" HorizontalAlignment="Left" Margin="34,115,0,0" VerticalAlignment="Top"/>
-        <Label Content="Textsuche" HorizontalAlignment="Left" Margin="309,142,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtSuche" Text="" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="309,170,0,0"/>
-        <Button x:Name="bntShow" Content="Anzeigen" HorizontalAlignment="Left" Margin="309,315,0,0" VerticalAlignment="Top" Width="119" Height="22"/>
-        <DatePicker x:Name="dpRangeDate" HorizontalAlignment="Left" Margin="309,239,0,0" VerticalAlignment="Top" Width="120"/>
-        <CheckBox x:Name="chkdateSince" Content="Zeige alle Daten&#xD;&#xA; ohne Einträge seit:" HorizontalAlignment="Left" Margin="309,203,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="bntNew" Content="Neuer Eintrag" HorizontalAlignment="Left" Margin="310,388,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="bntNew_Click"/>
-        <Button x:Name="bntEdit" Content="Eintrag bearbeiten" HorizontalAlignment="Left" Margin="309,351,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="BntEdit_Click"/>
-        <Label Content="Aktuelles Tagebuch:" HorizontalAlignment="Left" Margin="318,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.432,0.333"/>
+        <DataGrid x:Name="dgView" HorizontalAlignment="Left" Height="372" Margin="34,137,0,0" VerticalAlignment="Top" Width="266" IsReadOnly="True"/>
+        <Label Content="Entries:" HorizontalAlignment="Left" Margin="34,115,0,0" VerticalAlignment="Top"/>
+        <Label Content="Find by name" HorizontalAlignment="Left" Margin="309,138,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtSuche" Text="" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="309,166,0,0" TextChanged="Set_SearchElement"/>
+        <Button x:Name="bntShow" Content="Show results" HorizontalAlignment="Left" Margin="309,347,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="bntShow_Click"/>
+        <DatePicker x:Name="dpFrom" HorizontalAlignment="Left" Margin="346,243,0,0" VerticalAlignment="Top" Width="83"/>
+        <CheckBox x:Name="chkdateSince" Content="Find all dates with&#xD;&#xA; no entry" HorizontalAlignment="Left" Margin="309,199,0,0" VerticalAlignment="Top" Checked="Set_SearchElement"/>
+        <Button x:Name="bntNew" Content="New" HorizontalAlignment="Left" Margin="310,420,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="bntNew_Click"/>
+        <Button x:Name="bntEdit" Content="Edit" HorizontalAlignment="Left" Margin="309,383,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="BntEdit_Click"/>
+        <Label Content="Current diary" HorizontalAlignment="Left" Margin="318,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.432,0.333"/>
         <TextBox x:Name="txtTagebuch" IsEnabled="False" Text="" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="318,40,0,0"/>
-        <Button x:Name="bntClose" Content="Schliessen" HorizontalAlignment="Left" Margin="310,455,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="BntClose_Click"/>
-        <Button x:Name="bntClear" Content="Clear search" HorizontalAlignment="Left" Margin="309,277,0,0" VerticalAlignment="Top" Width="119" Height="22"/>
-        <Button x:Name="bntRemove" Content="Remove" HorizontalAlignment="Left" Margin="310,420,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="bntNew_Click"/>
-        <Button x:Name="bntChange" Content="Change diary" HorizontalAlignment="Left" Margin="318,79,0,0" VerticalAlignment="Top" Width="119" Height="22"/>
+        <Button x:Name="bntClose" Content="Close" HorizontalAlignment="Left" Margin="310,487,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="BntClose_Click"/>
+        <Button x:Name="bntClear" Content="Clear search" HorizontalAlignment="Left" Margin="309,309,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="bntClear_Click"/>
+        <Button x:Name="bntRemove" Content="Remove" HorizontalAlignment="Left" Margin="310,452,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="bntRemove_Click"/>
+        <Button x:Name="bntChange" Content="Change diary" HorizontalAlignment="Left" Margin="318,79,0,0" VerticalAlignment="Top" Width="119" Height="22" Click="bntChange_Click"/>
+        <Label Content="From:" HorizontalAlignment="Left" Margin="305,222,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.432,0.333"/>
+        <Label Content="To:" HorizontalAlignment="Left" Margin="305,252,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.432,0.333"/>
+        <DatePicker x:Name="dpTo" HorizontalAlignment="Left" Margin="346,273,0,0" VerticalAlignment="Top" Width="83"/>
     </Grid>
 </Window>
