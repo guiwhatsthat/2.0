@@ -33,10 +33,10 @@ namespace e_Tagebuch_2._0
             lblPicPath.Content = entry.Picture;
             if (entry.Date == null)
             {
-                dpDatepicker.DisplayDate = DateTime.Now;
+                dpDatepicker.SelectedDate = DateTime.Now;
             } else
             {
-                dpDatepicker.DisplayDate = entry.Date;
+                dpDatepicker.SelectedDate = entry.Date;
             }
                 
         }
@@ -45,12 +45,12 @@ namespace e_Tagebuch_2._0
         {
             //Save current data
             controlling con = new controlling();
-            if (txtName.Text == null || dpDatepicker.Text == null || txtMain.Text == null || lblPicPath.Content == null)
+            if (txtName.Text == null || dpDatepicker.SelectedDate == null|| txtMain.Text == null || lblPicPath.Content == null)
             {
                 MessageBox.Show("None of the values can be empty", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else
             {
-                con.Save_Entry(EntryID, txtName.Text, DateTime.Parse(dpDatepicker.Text), txtMain.Text, lblPicPath.Content.ToString());
+                con.Save_Entry(EntryID, txtName.Text, dpDatepicker.SelectedDate.Value, txtMain.Text, lblPicPath.Content.ToString());
             }            
         }
 

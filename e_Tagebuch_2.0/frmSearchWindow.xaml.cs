@@ -20,6 +20,7 @@ namespace e_Tagebuch_2._0
     public partial class frmSearchWindow : Window
     {
         int DiaryID;
+        List<int> DiaryViewList = new List<int>();
         public frmSearchWindow(int t_DiaryID)
         {
             DiaryID = t_DiaryID;
@@ -58,10 +59,9 @@ namespace e_Tagebuch_2._0
         {
             try
             {
-                var item = (Entry)dgView.SelectedItem;
-                if (item != null)
+                if (dgView.SelectedItem != null)
                 {
-                    frmEditor editor = new frmEditor(item.EntryID);
+                    frmEditor editor = new frmEditor(DiaryViewList[dgView.SelectedIndex]);
                     editor.Show();
                     this.Close();
                 }
@@ -73,11 +73,10 @@ namespace e_Tagebuch_2._0
 
         private void bntRemove_Click(object sender, RoutedEventArgs e)
         {
-            var item = (Entry)dgView.SelectedItem;
-            if (item != null)
+            if (dgView.SelectedItem != null)
             {
                 controlling con = new controlling();
-                con.Remove_Entry(item.EntryID);
+                con.Remove_Entry(DiaryViewList[dgView.SelectedIndex]);
                 Update_EntryView();
             }   
         }
@@ -90,6 +89,7 @@ namespace e_Tagebuch_2._0
             if (allEntries != null)
             {
                 dgView.ItemsSource = allEntries.Select(d => new {Name = d.Name, Date = d.Date , EntryID = d.EntryID });
+                DiaryViewList = allEntries.Select(e => e.EntryID).ToList();
             }
         }
 
