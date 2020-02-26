@@ -54,7 +54,7 @@ namespace e_Tagebuch_2._0
         {
             //Check if the user logi
             controlling con = new controlling();
-            if (con.Check_Credential(txtUsername.Text,txtPW.Text))
+            if (con.Check_Credential(txtUsername.Text,txtPassword.Password))
             {
                 con.Show_Diary(txtUsername.Text);
                 this.Close();

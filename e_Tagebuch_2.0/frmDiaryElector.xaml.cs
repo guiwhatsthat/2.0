@@ -81,7 +81,8 @@ namespace e_Tagebuch_2._0
                 e_Tagebuch_Context DB = new e_Tagebuch_Context();
                 var diary = DB.Diaries.FirstOrDefault(d => d.Name == cmbDiaries.SelectedItem.ToString());
                 con.Show_SearchWindow(diary.DiaryID);
-                this.Hide();
+                this.Close
+                    ();
             } else
             {
                 MessageBox.Show("No diary is selected", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
