@@ -142,7 +142,7 @@ namespace e_Tagebuch_2._0
         private void bntChange_Click(object sender, RoutedEventArgs e)
         {
             controlling con = new controlling();
-            con.Show_Diary(con.Get_DiaryUser(DiaryID));
+            con.Show_Diary(DiaryID);
             this.Close();
         }
     }

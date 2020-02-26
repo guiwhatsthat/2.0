@@ -20,16 +20,15 @@ namespace e_Tagebuch_2._0
     /// </summary>
     public partial class frmDiaryElector : Window
     {
-        string CurrentUsername;
-        public frmDiaryElector(string t_CurrentUsername)
+        int currentUserID;
+        public frmDiaryElector(int t_currentUserID)
         {
-            CurrentUsername = t_CurrentUsername;
+            currentUserID = t_currentUserID;
             InitializeComponent();
 
             //Set combobox with diaries
             controlling con = new controlling();
-            int userID = con.Get_UserID(t_CurrentUsername);
-            foreach (var diary in con.Get_AllDiaries(userID))
+            foreach (var diary in con.Get_AllDiaries(currentUserID))
             {
                 cmbDiaries.Items.Add(diary);
             }
@@ -54,7 +53,7 @@ namespace e_Tagebuch_2._0
                 }
                 else
                 {
-                    int id = con.Create_Diary(txtDiaryName.Text, CurrentUsername);
+                    int id = con.Create_Diary(txtDiaryName.Text, currentUserID);
                     if (id == -1)
                     {
                         throw new Exception("Could not create the diary");

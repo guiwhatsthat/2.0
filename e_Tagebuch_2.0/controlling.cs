@@ -9,28 +9,28 @@ namespace e_Tagebuch_2._0
 {
     class controlling
     {
-        public bool Check_Credential(string t_Username, string t_Password)
+        public User Check_Credential(string t_Username, string t_Password)
         {
             using (var DB = new e_Tagebuch_Context())
             {
-                return DB.Users.Any(u => u.Username == t_Username && u.Password == t_Password);     
+                return DB.Users.FirstOrDefault(u => u.Username == t_Username && u.Password == t_Password);     
             }
         }
 
-        public void Show_Diary(string t_CurrentUserName)
+        public void Show_Diary(int t_currentUserID)
         {
             //Create a from DiaryElector
-            frmDiaryElector DiaryElector = new frmDiaryElector(t_CurrentUserName);
+            frmDiaryElector DiaryElector = new frmDiaryElector(t_currentUserID);
             DiaryElector.Show();
         }
 
-        public int Create_Diary(string t_Name, string t_User)
+        public int Create_Diary(string t_Name, int t_ID)
         {
             int id = -1;
             using (var DB = new e_Tagebuch_Context())
             {
                 //Get UserID
-                var user = DB.Users.FirstOrDefault(u => u.Username == t_User);
+                var user = DB.Users.FirstOrDefault(u => u.UserID == t_ID);
                 //Create Diary
                 var newDiary = DB.Diaries.Add(new Diary()
                 {
@@ -217,6 +217,18 @@ namespace e_Tagebuch_2._0
         {
             e_Tagebuch_Context DB = new e_Tagebuch_Context();
             return Get_UserName(DB.Diaries.FirstOrDefault(d => d.DiaryID== t_DiaryID).user_id);
+        }
+
+        public User Create_User (string t_User, string t_Pw)
+        {
+            e_Tagebuch_Context DB = new e_Tagebuch_Context();
+            var newUser = DB.Users.Add(new User()
+            {
+                Username = t_User,
+                Password = t_Pw
+            });
+            DB.SaveChanges();
+            return newUser;
         }
     }
 }

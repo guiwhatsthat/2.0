@@ -12,6 +12,7 @@
         <Label Content="Username:" HorizontalAlignment="Left" Margin="29,32,0,0" VerticalAlignment="Top"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="29,63,0,0" VerticalAlignment="Top"/>
         <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="100,66,0,0" VerticalAlignment="Top" Width="120" Height="23" Password="Password"/>
+        <CheckBox x:Name="rbnNewUser"  Content="Create user" HorizontalAlignment="Left" Margin="29,108,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

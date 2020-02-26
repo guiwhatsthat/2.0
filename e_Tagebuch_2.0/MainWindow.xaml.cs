@@ -24,44 +24,58 @@ namespace e_Tagebuch_2._0
         {
             InitializeComponent();
             //Create first user, only when no other user exists in DB
-            e_Tagebuch_Context con = new e_Tagebuch_Context();
-            if (!con.Users.Any())
+            e_Tagebuch_Context DB = new e_Tagebuch_Context();
+            if (!DB.Users.Any())
             {
-                con.Users.Add(new User()
-                {
-                    Username = "User",
-                    Password = "Password"
-                });
-                con.SaveChanges();
+                controlling con = new controlling();
+                con.Create_User("User", "Password");
             }
 
             //Create all possible types
             string[] Types = new string[]{ "Work", "Family", "Holidays", "Birthday", "School"};
             foreach (string typeName in Types)
             {
-                if (!con.Types.Any(t => t.Name == typeName))
+                if (!DB.Types.Any(t => t.Name == typeName))
                 {
-                    con.Types.Add(new Type()
+                    DB.Types.Add(new Type()
                     {
                         Name = typeName
                     });
                 }
             }
-            con.SaveChanges();
+            DB.SaveChanges();
         }
 
         private void bntLogin_Click(object sender, RoutedEventArgs e)
         {
             //Check if the user logi
             controlling con = new controlling();
-            if (con.Check_Credential(txtUsername.Text,txtPassword.Password))
+            int ID = 0;
+            bool openForm = false;
+
+            if (rbnNewUser.IsChecked.Value) 
             {
-                con.Show_Diary(txtUsername.Text);
+                //Create User
+                ID = (con.Create_User(txtUsername.Text, txtPassword.Password)).UserID;
+                openForm = true;
+            } else
+            {
+                var user = con.Check_Credential(txtUsername.Text, txtPassword.Password);
+                if (user != null)
+                {
+                    ID = user.UserID;
+                    openForm = true;
+                }
+                else
+                {
+                    MessageBox.Show("Username or Password not correct", "Login", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+
+            if (openForm)
+            {
+                con.Show_Diary(ID);
                 this.Close();
-            } 
-            else
-            {
-                MessageBox.Show("Username or Password not correct","Login", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }
