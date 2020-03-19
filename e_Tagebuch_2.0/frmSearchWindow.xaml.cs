@@ -93,7 +93,7 @@ namespace e_Tagebuch_2._0
             }
         }
 
-        //Function to control the search option
+        //Function to control the search option (that only one is selected at once)
         public void Set_SearchElement (object sender, RoutedEventArgs e)
         {
             var list = (this.Content as Panel).Children.OfType<CheckBox>();
@@ -116,8 +116,9 @@ namespace e_Tagebuch_2._0
 
         private void bntShow_Click(object sender, RoutedEventArgs e)
         {
+            //searches for all entries which match the given criterias
+            //and adds them to the view
             controlling con = new controlling();
-
             if (!string.IsNullOrEmpty(txtSuche.Text))
             {
                 dgView.ItemsSource = con.Search_Entries("Name", txtSuche.Text).Select(d => new { Name = d.Name, Date = d.Date, EntryID = d.EntryID });
@@ -135,12 +136,14 @@ namespace e_Tagebuch_2._0
 
         private void bntClear_Click(object sender, RoutedEventArgs e)
         {
+            //Clears the view (removes the filter criterias)
             Set_SearchElement(sender, e);
             Update_EntryView();
         }
 
         private void bntChange_Click(object sender, RoutedEventArgs e)
         {
+            //closes the programm
             controlling con = new controlling();
             con.Show_Diary(DiaryID);
             this.Close();

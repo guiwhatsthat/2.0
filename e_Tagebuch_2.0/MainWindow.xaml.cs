@@ -74,6 +74,7 @@ namespace e_Tagebuch_2._0
 
             if (openForm)
             {
+                //Show the diary selector
                 con.Show_Diary(ID);
                 this.Close();
             }

@@ -108,7 +108,7 @@ namespace e_Tagebuch_2._0
                 DB.SaveChanges();
             }
         }
-
+        //the names of the methods should be selfexplaining  ;)
         public Diary Get_DiaryFromEntry(int t_EntryID)
         {
             e_Tagebuch_Context DB = new e_Tagebuch_Context();
@@ -186,7 +186,7 @@ namespace e_Tagebuch_2._0
             var foundEntries = new List<object>();
             e_Tagebuch_Context DB = new e_Tagebuch_Context();
 
-            //Date range (Aus dem Internet: https://stackoverflow.com/questions/1847580/how-do-i-loop-through-a-date-range)
+            //Date range (Source of the code: https://stackoverflow.com/questions/1847580/how-do-i-loop-through-a-date-range)
             IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
             {
                 for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))

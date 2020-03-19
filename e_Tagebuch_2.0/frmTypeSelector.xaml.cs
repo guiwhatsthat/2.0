@@ -45,6 +45,7 @@ namespace e_Tagebuch_2._0
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            //Function that ensures that no more than three types are selected
             CheckBox ClickedCheckbox = (CheckBox)sender;
             List<CheckBox> AlleDomaenen = new List<CheckBox>();
             foreach (CheckBox CheckBoxDomaene in GridCheckBox.Children)

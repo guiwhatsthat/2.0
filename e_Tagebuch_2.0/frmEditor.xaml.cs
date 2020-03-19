@@ -43,7 +43,7 @@ namespace e_Tagebuch_2._0
 
         private void BntSave_Click(object sender, RoutedEventArgs e)
         {
-            //Save current data
+            //Saves current data
             controlling con = new controlling();
             if (txtName.Text == null || dpDatepicker.SelectedDate == null|| txtMain.Text == null || lblPicPath.Content == null)
             {
@@ -56,6 +56,7 @@ namespace e_Tagebuch_2._0
 
         private void BntClose_Click(object sender, RoutedEventArgs e)
         {
+            //Gets the user back to the search window without saving the current editing diary
             controlling con = new controlling();
             var diary = con.Get_DiaryFromEntry(EntryID);
             frmSearchWindow searchWindow = new frmSearchWindow(diary.DiaryID);
@@ -65,12 +66,14 @@ namespace e_Tagebuch_2._0
 
         private void BntChoose_Click(object sender, RoutedEventArgs e)
         {
+            //Opens the GUI where the user can select the types
             frmTypeSelector typeSelector = new frmTypeSelector(EntryID);
             typeSelector.Show();
         }
 
         private void BntChoosePic_Click(object sender, RoutedEventArgs e)
         {
+            //The openfile dialog for the picture lable. Will only store the filepathname
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
             if (openFileDialog.ShowDialog() == true)
