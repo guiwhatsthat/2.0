@@ -10,7 +10,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="grbType" Header="Alle Domänen" HorizontalAlignment="Left" Height="125" Margin="10,10,0,0" VerticalAlignment="Top" Width="100">
+        <GroupBox x:Name="grbType" Header="All types" HorizontalAlignment="Left" Height="125" Margin="10,10,0,0" VerticalAlignment="Top" Width="100">
             <Grid x:Name="GridCheckBox" HorizontalAlignment="Left" Height="126" Margin="-4,-1,-21,-22" VerticalAlignment="Top" Width="113">
                 <CheckBox x:Name="chbWork" Content="Work" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
                 <CheckBox x:Name="chbFamily" Content="Family" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
