@@ -43,10 +43,19 @@ namespace e_Tagebuch_2._0
         {
             //Create a new Entry
             controlling con = new controlling();
-            int entryID = con.Create_Entry("New Entry", DiaryID);
-            frmEditor editor = new frmEditor(entryID);
-            editor.Show();
-            this.Close();
+            //first check if there are more than 100 entires existing
+            if (con.Check_MoreThan(DiaryID))
+            {
+                int entryID = con.Create_Entry("New Entry", DiaryID);
+                frmEditor editor = new frmEditor(entryID);
+                editor.Show();
+                this.Close();
+            }
+            else {
+                MessageBox.Show("Can not create more than 100 entries");
+            }
+
+            
         }
 
         private void BntClose_Click(object sender, RoutedEventArgs e)

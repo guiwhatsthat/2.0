@@ -230,5 +230,18 @@ namespace e_Tagebuch_2._0
             DB.SaveChanges();
             return newUser;
         }
+
+        public Boolean Check_MoreThan(int t_DiaryID)
+        {
+            e_Tagebuch_Context DB = new e_Tagebuch_Context();
+            var Entries = DB.Entries.Where(e => e.Diary_id == t_DiaryID);
+            if (Entries.Count() >= 100)
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
+        }
     }
 }

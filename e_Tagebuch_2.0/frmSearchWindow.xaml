@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:e_Tagebuch_2._0"
         mc:Ignorable="d"
-        Title="frmSearchWindow" Height="564.889" Width="474.111">
+        Title="frmSearchWindow" Height="564.889" Width="474.111" WindowStartupLocation="CenterScreen">
     <Grid>
         <CheckBox x:Name="chkDate" Content="Search by date" HorizontalAlignment="Left" Margin="34,42,0,0" VerticalAlignment="Top" Checked="Set_SearchElement"/>
         <CheckBox x:Name="chkType" Content="Search by type" HorizontalAlignment="Left" Margin="34,86,0,0" VerticalAlignment="Top" Checked="Set_SearchElement"/>
